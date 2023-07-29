@@ -5,6 +5,15 @@ from moviwebb_app.data_manager.json_data_manager import JSONdata_manager
 app = Flask(__name__)
 data_manager = JSONdata_manager('movies.json')
 
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html'), 500
+
 @app.route('/')
 def home():
     return "welcome to the moviweb app home page"
@@ -26,6 +35,10 @@ def add_user():
         return render_template('add_user.html')
     if request.method == 'POST':
         new_user_name = request.form['new_user']
+        all_users = data_manager.get_all_users()
+        for user in all_users:
+            if user['name'] == new_user_name:
+                return f"Error: User '{new_user_name}' already exists."
         data_manager.add_user(new_user_name)
         return redirect(url_for('list_users'))
 
