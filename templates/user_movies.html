@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User {{user_id}} Movies</title>
+</head>
+<body>
+
+<ul>
+{% for movie in movies%}
+    <li>{{movie}}</li>
+
+{% endfor %}
+
+</ul>
+</body>
+</html>

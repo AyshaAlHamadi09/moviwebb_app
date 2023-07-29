@@ -13,3 +13,17 @@ class DataManagerInterface(ABC):
     @abstractmethod
     def add_user(self):
         pass
+
+
+    @abstractmethod
+    def add_movie(self):
+        pass
+
+
+    @abstractmethod
+    def update_movie(self):
+        pass
+
+    @abstractmethod
+    def delete_movie(self):
+        pass
