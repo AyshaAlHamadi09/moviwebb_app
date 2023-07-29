@@ -8,16 +8,16 @@
     <form action="" method="post">
 
         <label for="name">Movie name:</label>
-        <input type="text" id="name" name="name" >
+        <input type="text" id="name" name="name" placeholder="{{movie['name']}}">
 
         <label for="director">Director:</label>
-        <input type="text" id="director" name="director">
+        <input type="text" id="director" name="director" placeholder="{{movie['director']}}">
 
         <label for="year">Year of release:</label>
-        <input type="text" id="year" name="year" >
+        <input type="text" id="year" name="year" placeholder="{{movie['year']}}">
 
         <label for="rating">Rating:</label>
-        <input type="text" id="rating" name="rating">
+        <input type="text" id="rating" name="rating" placeholder="{{movie['rating']}}">
 
 
         <button type="submit">Save Updates</button>

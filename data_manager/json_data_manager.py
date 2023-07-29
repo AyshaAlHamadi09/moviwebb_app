@@ -87,8 +87,18 @@ class JSONdata_manager(DataManagerInterface):
 
 
 
-    def delete_movie(self):
-        pass
+    def delete_movie(self, user_id, movie_id):
+        with open(self.filename, 'r') as fileobject:
+            data = fileobject.read()
+            json_data = json.loads(data)
+        for item in json_data:
+            if item['id'] == user_id:
+                for movie in item['movies']:
+                    if movie['id'] == movie_id:
+                        item['movies'].remove(movie)
+        with open(self.filename, 'w') as fileobject:
+            json.dump(json_data, fileobject)
+        return f"movie was deleted"
 
 
 

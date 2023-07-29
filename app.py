@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, url_for, redirect
 from moviwebb_app.data_manager.json_data_manager import JSONdata_manager
 
+
 app = Flask(__name__)
 data_manager = JSONdata_manager('movies.json')
 
@@ -40,23 +41,35 @@ def add_movie(user_id):
 @app.route('/users/<int:user_id>/update_movie/<int:movie_id>', methods=['GET','POST'])
 def update_movie(user_id, movie_id):
     if request.method == 'GET':
-        return render_template('update_movie.html')
+        movies = data_manager.get_user_movies(user_id) #list of dicts
+        movie_to_update = {}
+        for movie in movies:
+            if movie['id'] == movie_id:
+                movie_to_update = movie
+        return render_template('update_movie.html', movie=movie_to_update)
     if request.method == 'POST':
         name = request.form['name']
         director = request.form['director']
         year = request.form['year']
         rating = request.form['rating']
-        updated_movie = {'name': name, 'director': director, 'year': year, 'rating': rating}
+        updated_movie = {}
+        if name:
+            updated_movie['name'] = name
+        if director:
+            updated_movie['director'] = director
+        if year:
+            updated_movie['year'] = year
+        if rating:
+            updated_movie['rating'] = rating
         data_manager.update_movie(user_id, movie_id, updated_movie)
         return redirect(url_for('user_movies', user_id=user_id))
 
 
 
-
-@app.route('/users/<int:user_id>/delete_movie/<int:movie_id>', methods=['DELETE'])
-def delete_movie():
-    if request.method == 'DELETE':
-        pass
+@app.route('/users/<int:user_id>/delete_movie/<int:movie_id>')
+def delete_movie(user_id, movie_id):
+    data_manager.delete_movie(user_id, movie_id)
+    return redirect(url_for('user_movies', user_id=user_id))
 
 
 
