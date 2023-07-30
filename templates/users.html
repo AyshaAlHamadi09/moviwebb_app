@@ -3,22 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Users - MovieWeb App</title>
+    <style>
+body {font-family: 'Montserrat', sans-serif;}
+h1 {display: flex; justify-content: center; background-color: #f0f0f0;}
+ul {width: 100%; display: flex; flex-wrap: wrap; list-style: none; padding: 0;
+justify-content: center;align-items: center;}
+li {display: inline-flex; align-items: center; justify-content: center; background-color: #f0f0f0;
+ border: 1px solid #ccc;border-radius: 4px; padding: 10px; margin: 5px; min-width: 100px;
+  box-sizing: border-box; flex-direction: column}
+a {text-decoration: none;}
+
+.avatar-img {width: 200px;height: 200px;}
+
+    </style>
+    <link rel="stylesheet" href="https://avatars.dicebear.com/api/avataaars.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body>
 <h1>Users</h1>
 
 <ul>
     {% for user in all_users %}
-    <li><a href="{{url_for('user_movies', user_id=user['id'])}}">{{user['name']}}</a></li>
+    <li class="box-item"><a href="{{url_for('user_movies', user_id=user['id'])}}"><strong>{{user['name']}}</strong></a>
+        <a href="{{url_for('user_movies', user_id=user['id'])}}">
+            <img class="avatar-img" src="https://avatars.dicebear.com/api/avataaars/{{ user['id'] }}.svg"></li>
+    </a>
 
     {% endfor %}
-
-
-
-
-
-
 </ul>
+
+
+
 
 </body>
 </html>

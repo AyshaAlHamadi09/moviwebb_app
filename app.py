@@ -16,7 +16,7 @@ def internal_server_error(e):
 
 @app.route('/')
 def home():
-    return "welcome to the moviweb app home page"
+    return render_template("homepage.html")
 
 @app.route('/users')
 def list_users():
@@ -27,7 +27,9 @@ def list_users():
 @app.route('/user/<int:user_id>')
 def user_movies(user_id):
     movies = data_manager.get_user_movies(user_id)
-    return render_template('user_movies.html', movies=movies)
+    if movies != []:
+        return render_template('user_movies.html', user_id=user_id, movies=movies)
+    return render_template('user_has_no_movies.html', user_id=user_id)
 
 @app.route('/add_user', methods = ['GET', 'POST'])
 def add_user():

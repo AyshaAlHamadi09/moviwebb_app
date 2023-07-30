@@ -86,6 +86,7 @@ class JSONdata_manager(DataManagerInterface):
             director = movie_info.get("Director")
             year = movie_info.get("Year")
             rating = movie_info.get("imdbRating")
+            poster = movie_info.get("Poster")
 
             if not name or not director or not year or not rating:
                 return "Error: Movie data not found in the API response."
@@ -95,7 +96,7 @@ class JSONdata_manager(DataManagerInterface):
                 json_data = json.loads(data)
 
             new_movie_id = max((movie['id'] for item in json_data for movie in item['movies']), default=0) + 1
-            new_movie = {"id": new_movie_id, "name": name, "director": director, "year": year, "rating": rating}
+            new_movie = {"id": new_movie_id, "name": name, "director": director, "year": year, "rating": rating, "poster": poster}
 
             for item in json_data:
                 if item['id'] == user_id:

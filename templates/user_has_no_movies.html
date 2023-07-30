@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies for user {{user_id}}</title>
+  <style>body {font-family: 'Montserrat', sans-serif;}
+    h2 {display: flex; justify-content: center; color: #E3170A;}
+    a {display: inline-flex; align-items: center; justify-content: center; background-color: #f0f0f0;
+ border: 1px solid #ccc;border-radius: 4px; padding: 10px; margin: 5px; min-width: 100px;
+  box-sizing: border-box; flex-direction: column}
+</style>
+</head>
+<body>
+<h2>You don't have any movies saved</h2>
+<a href="{{url_for('add_movie', user_id=user_id)}}">Add a new movie</a>
+<a href="{{url_for('list_users')}}">go back to users</a>
+<a href="{{url_for('home')}}">home page</a>
+
+
+</body>
+</html>

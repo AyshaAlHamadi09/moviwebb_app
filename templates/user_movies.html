@@ -3,15 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>User {{user_id}} Movies</title>
+    <style>
+body {font-family: 'Montserrat', sans-serif;}
+
+h1 {display: flex; justify-content: center; background-color: #f0f0f0;}
+
+ul {width: 100%; display: flex; flex-wrap: wrap; list-style: none; padding: 0;
+justify-content: center;align-items: center;}
+
+li {display: inline-flex; align-items: center; justify-content: center;flex-direction: column;
+ background-color: #f0f0f0;
+ border: 1px solid #ccc;border-radius: 4px; padding: 10px; margin: 5px; min-width: 100px; box-sizing: border-box;}
+
+a {text-decoration: none; display: inline-flex; align-items: center; justify-content: center; background-color: #f0f0f0;
+ border: 1px solid #ccc;border-radius: 4px; padding: 10px; margin: 5px; min-width: 100px;
+  box-sizing: border-box; flex-direction: column}
+
+.movie_name {font-size: 20px;font-weight: bold;}
+
+.poster {width: 200px;height: 300px;}
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <ul>
 {% for movie in movies%}
-    <li>{{movie}}</li>
+    <li>
+        <strong>{{movie['name']}}</strong><br>
+        <img class="poster" src="{{movie['poster']}}">
+        released {{movie['year']}}<br>
+        directed by {{movie['director']}}<br>
+        rated {{movie['rating']}}<br>
+        <a href="{{url_for('delete_movie', user_id=user_id, movie_id=movie['id'])}}">delete movie</a>
+        <a href="{{url_for('update_movie', user_id=user_id, movie_id=movie['id'])}}">update movie</a>
+    </li>
 
 {% endfor %}
 
 </ul>
+<a href="{{url_for('add_movie', user_id=user_id)}}">Add a new movie</a>
+<a href="{{url_for('list_users')}}">go back to users</a>
+<a href="{{url_for('home')}}">home page</a>
+
 </body>
 </html>
